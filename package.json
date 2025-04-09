@@ -15,9 +15,19 @@
     "commands": [
       {
         "command": "testie.helloWorld",
-        "title": "Hello World"
+        "title": "Hello World",
+        "icon": "$(call-incoming)",
+        "displayTitleOnActionBar": true
       }
-    ]
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "testie.helloWorld",
+          "group": "navigation@1"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
