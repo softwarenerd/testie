@@ -45,15 +45,15 @@
       "editor/actions/right": [
         {
           "command": "testie.toggleEditMode",
-          "group": "navigation@100"
+          "group": "testie@1"
         },
         {
           "command": "testie.toggleRenderOnSave",
-          "group": "navigation@101"
+          "group": "testie@2"
         },
         {
           "command": "testie.buttonWithLabel",
-          "group": "navigation@102"
+          "group": "testie@3"
         }
       ]
     }
