@@ -1,26 +1,27 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
+	console.log('Testie: Extension is now active.');
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "testie" is now active!');
+	let editMode: 'source' | 'visual' = 'source';
+	await vscode.commands.executeCommand<string>('setContext', 'testie.editMode', editMode);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('testie.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from testie!');
-	});
+	let renderOnSave = false;
+	await vscode.commands.executeCommand<boolean>('setContext', 'testie.renderOnSave', renderOnSave);
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(vscode.commands.registerCommand('testie.toggleEditMode', async () => {
+		editMode = editMode === 'source' ? 'visual' : 'source';
+		await vscode.commands.executeCommand<boolean>('setContext', 'testie.editMode', editMode);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand('testie.toggleRenderOnSave', async () => {
+		renderOnSave = !renderOnSave;
+		await vscode.commands.executeCommand<boolean>('setContext', 'testie.renderOnSave', renderOnSave);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand('testie.buttonWithLabel', () => {
+		vscode.window.showInformationMessage('buttonWithLabel executed');
+	}));
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}

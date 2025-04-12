@@ -1,7 +1,7 @@
 {
   "name": "testie",
-  "displayName": "testie",
-  "description": "Testie",
+  "displayName": "Testie",
+  "description": "Testie extension for VSCode",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.97.0"
@@ -14,17 +14,46 @@
   "contributes": {
     "commands": [
       {
-        "command": "testie.helloWorld",
-        "title": "Hello World",
-        "icon": "$(call-incoming)",
-        "displayTitleOnActionBar": true
+        "command": "testie.toggleEditMode",
+        "title": "Edit Mode",
+        "actionBarOptions": {
+          "controlType": "toggle",
+          "leftTitle": "Source",
+          "rightTitle": "Visual",
+          "toggled": "testie.editMode == 'visual'"
+        }
+      },
+      {
+        "command": "testie.toggleRenderOnSave",
+        "title": "Render on Save",
+        "actionBarOptions": {
+          "controlType": "checkbox",
+          "checked": "testie.renderOnSave == true"
+        }
+      },
+      {
+        "command": "testie.buttonWithLabel",
+        "icon": "$(call-outgoing)",
+        "title": "Button with Label",
+        "actionBarOptions": {
+          "controlType": "button",
+          "displayTitle": true
+        }
       }
     ],
     "menus": {
-      "editor/title": [
+      "editor/actions/right": [
         {
-          "command": "testie.helloWorld",
-          "group": "navigation@1"
+          "command": "testie.toggleEditMode",
+          "group": "navigation@100"
+        },
+        {
+          "command": "testie.toggleRenderOnSave",
+          "group": "navigation@101"
+        },
+        {
+          "command": "testie.buttonWithLabel",
+          "group": "navigation@102"
         }
       ]
     }
